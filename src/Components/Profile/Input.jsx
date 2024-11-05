@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 export default function Input({ value, handleInputChange, inputName }) {
 	return (
 		<input
+			autoFocus
 			type="text"
 			name={inputName}
 			value={value}

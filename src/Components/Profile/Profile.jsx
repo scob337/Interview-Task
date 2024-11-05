@@ -5,10 +5,14 @@ import { GiReturnArrow } from "react-icons/gi";
 
 import Li from "./Li";
 import Input from "./Input";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import axiosInstance from "../../Axios";
 
 export default function Profile() {
+	const location = useLocation();
+	const pathSegments = location.pathname.split("/");
+	const isEditMode = pathSegments.includes("edit");
+
 	const [isEditing, setIsEditing] = useState(false);
 	const [Loading, setLoading] = useState(false);
 	const [Success, setSuccess] = useState(null);
@@ -45,7 +49,11 @@ export default function Profile() {
 	};
 
 	const { id } = useParams();
-
+	useEffect(() => {
+		if (isEditMode) {
+			setIsEditing(true);
+		}
+	}, [isEditMode]);
 	useEffect(() => {
 		const fetchUserData = async () => {
 			try {

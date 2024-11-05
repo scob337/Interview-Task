@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Pagination from "./Pagination";
-import axios from "axios";
 import { thData } from "./thData";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../Axios";
 
 export default function Tables() {
 	const [data, setData] = useState([]);
@@ -13,7 +13,7 @@ export default function Tables() {
 
 	const fetchData = async (page) => {
 		try {
-			const response = await axios.get(`https://reqres.in/api/users`, {
+			const response = await axiosInstance.get(`/users`, {
 				params: { page },
 			});
 			setData(response.data.data);
@@ -41,7 +41,7 @@ export default function Tables() {
 	};
 
 	return (
-		<div className="relative overflow-x-auto shadow-md sm:rounded-lg flex flex-col justify-center items-center gap-3 p-2 h-[100vh]">
+		<div className="relative overflow-x-auto shadow-md sm:rounded-lg flex flex-col justify-center items-center gap-3 p-2 min-h-[100vh]">
 			<input
 				type="text"
 				placeholder="Search by First or Last Name"
@@ -49,7 +49,7 @@ export default function Tables() {
 				onChange={handleSearch}
 				className="px-4 py-2 border border-gray-300 rounded mb-4 w-1/2"
 			/>
-                
+
 			<div className="h-[70%] w-[90%]">
 				<table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
 					<thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -82,10 +82,16 @@ export default function Tables() {
 										/>
 									</td>
 									<td className="px-6 py-4 flex gap-2">
-										<button className="ring-1 ring-green-500 hover:bg-green-500 hover:text-white transition-all px-2">
+										<Link
+											to={`/user/${user.id}/edit`}
+											className="ring-1 ring-green-500 hover:bg-green-500 hover:text-white transition-all px-2"
+										>
 											Edit
-										</button>
-										<Link to={`/user/${user.id}`} className="ring-1 ring-black hover:bg-black hover:text-white transition-all px-2">
+										</Link>
+										<Link
+											to={`/user/${user.id}`}
+											className="ring-1 ring-black hover:bg-black hover:text-white transition-all px-2"
+										>
 											View
 										</Link>
 									</td>

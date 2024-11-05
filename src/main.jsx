@@ -6,7 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Profile from "./Components/Profile/Profile.jsx";
 const router = createBrowserRouter([
 	{ path: "/", element: <App /> },
-	{ path: "/user/:id", element: <Profile /> }, // أضف : قبل id
+	{ path: "/user/:id", element: <Profile /> },
+	{ path: "/user/:id/edit", element: <Profile /> },
 ]);
 createRoot(document.getElementById("root")).render(
 	<StrictMode>
