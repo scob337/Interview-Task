@@ -14,7 +14,7 @@ export default function Pagination({ page, setPage, totalPages }) {
 	};
 
 	return (
-		<div className="flex justify-between items-center mt-4 gap-3">
+		<div className="flex justify-center items-center mt-4 gap-3">
 			<button
 				onClick={handlePreviousPage}
 				disabled={page === 1}
@@ -23,9 +23,23 @@ export default function Pagination({ page, setPage, totalPages }) {
 				Previous
 			</button>
 
-			<span className="text-sm text-gray-500 dark:text-gray-400">
-				Page {page} of {totalPages}
-			</span>
+			<div className="flex gap-2">
+				{Array.from({ length: totalPages }, (_, index) => index + 1).map(
+					(pageNumber) => (
+						<button
+							key={pageNumber}
+							onClick={() => setPage(pageNumber)}
+							className={`px-3 py-1 rounded ${
+								pageNumber === page
+									? "bg-green-500 text-white"
+									: "bg-gray-200 text-gray-700"
+							}`}
+						>
+							{pageNumber}
+						</button>
+					)
+				)}
+			</div>
 
 			<button
 				onClick={handleNextPage}

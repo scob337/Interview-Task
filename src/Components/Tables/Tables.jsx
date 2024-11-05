@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Pagination from "./Pagination";
 import axios from "axios";
 import { thData } from "./thData";
+import { Link } from "react-router-dom";
 
 export default function Tables() {
 	const [data, setData] = useState([]);
@@ -84,9 +85,9 @@ export default function Tables() {
 										<button className="ring-1 ring-green-500 hover:bg-green-500 hover:text-white transition-all px-2">
 											Edit
 										</button>
-										<button className="ring-1 ring-black hover:bg-black hover:text-white transition-all px-2">
+										<Link to={`/user/${user.id}`} className="ring-1 ring-black hover:bg-black hover:text-white transition-all px-2">
 											View
-										</button>
+										</Link>
 									</td>
 								</tr>
 							))
