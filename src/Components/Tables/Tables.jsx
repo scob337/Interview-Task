@@ -3,7 +3,7 @@ import Pagination from "./Pagination";
 import { thData } from "./thData";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../Axios";
-
+import { Helmet } from "react-helmet";
 export default function Tables() {
 	const [data, setData] = useState([]);
 	const [filteredData, setFilteredData] = useState([]);
@@ -41,13 +41,16 @@ export default function Tables() {
 	};
 
 	return (
-		<div className="relative overflow-x-auto shadow-md sm:rounded-lg flex flex-col justify-center items-center gap-3 p-2 min-h-[100vh]">
+		<div className="relative overflow-x-scroll shadow-md sm:rounded-lg flex flex-col justify-center items-center gap-3 p-2 min-h-[100vh] ">
+			<Helmet>
+				<title>Home Page</title>
+			</Helmet>
 			<input
 				type="text"
 				placeholder="Search by First or Last Name"
 				value={searchQuery}
 				onChange={handleSearch}
-				className="px-4 py-2 border border-gray-300 rounded mb-4 w-1/2"
+				className="px-4 py-2 border border-gray-300 rounded mb-4 w-[100%] lg:w-1/2"
 			/>
 
 			<div className="h-[70%] w-[90%]">
@@ -61,20 +64,21 @@ export default function Tables() {
 							))}
 						</tr>
 					</thead>
-					<tbody>
+					<tbody className="h-[40vh]">
 						{filteredData.length > 0 ? (
 							filteredData.map((user) => (
 								<tr
 									key={user.id}
-									className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+									className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700
+									h-[50px]  "
 								>
-									<td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+									<td className=" font-medium text-gray-900 whitespace-nowrap dark:text-white px-5 py-1">
 										{user.id}
 									</td>
-									<td className="px-6 py-4">{user.first_name}</td>
-									<td className="px-6 py-4">{user.last_name}</td>
-									<td className="px-6 py-4">{user.email}</td>
-									<td className="px-6 py-4">
+									<td className="px-5 py-1 ">{user.first_name}</td>
+									<td className="px-5 py-1 ">{user.last_name}</td>
+									<td className="px-5 py-1 ">{user.email}</td>
+									<td className="px-5 py-1 ">
 										<img
 											src={user.avatar}
 											alt={user.first_name}

@@ -3,8 +3,7 @@ export default function Li({ title, content }) {
 	return (
 		<li
 			className="text-gray-600 dark:text-gray-400 flex justify-between gap-2 w-[80%] p-2
-		
-		"
+		max-md:flex  max-md:flex-col max-md:justify-center"		
 		>
 			<p>{title}:</p>
 			<p className="font-semibold w-[60%] lg:w-[50%]"> {content} </p>

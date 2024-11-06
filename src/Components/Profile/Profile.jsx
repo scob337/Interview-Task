@@ -7,6 +7,7 @@ import Li from "./Li";
 import Input from "./Input";
 import { Link, useParams, useLocation } from "react-router-dom";
 import axiosInstance from "../../Axios";
+import { Helmet } from "react-helmet";
 
 export default function Profile() {
 	const location = useLocation();
@@ -54,6 +55,7 @@ export default function Profile() {
 			setIsEditing(true);
 		}
 	}, [isEditMode]);
+
 	useEffect(() => {
 		const fetchUserData = async () => {
 			try {
@@ -69,11 +71,15 @@ export default function Profile() {
 				console.error("Error fetching user data:", error);
 			}
 		};
+
 		fetchUserData();
 	}, [id]);
 
 	return (
 		<div className="flex flex-col items-center justify-center gap-4 ring w-[95%] md:w-[50%] min-h-[50vh] mt-5 m-auto p-2">
+			<Helmet>
+				<title>{userInfo.firstName}</title>
+			</Helmet>
 			<div className="text-3xl cursor-pointer w-full">
 				<Link to="/" title="Back to Home" onClick={() => setIsEditing(false)}>
 					<GiReturnArrow size={36} />
